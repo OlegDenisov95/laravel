@@ -24,18 +24,20 @@
         @csrf
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" placeholder="Title" name = "title" required>
+            <input type="text" class="form-control" id="title" placeholder="Title" name = "title" value="{{ old('title') }}">
         </div>
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea class="form-control" id="content" rows="5" name="content" placeholder="Content" req uired></textarea>
+            <textarea class="form-control" id="content" rows="5" name="content" placeholder="Content" value="{{ old('content') }}"></textarea>
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect2">Rubric</label>
             <select class="form-control" id="rubric_id" name ="rubric_id">
                 <option value="">Select rubric</option>
                 @foreach($rubrics as $k => $v)
-                  <option value="{{$k}}">{{$v}}</option>
+                  <option value="{{$k}}"
+                  @if(old('$rubric_id')== $k) selected @endif
+                  >{{$v}}</option>
 
                 @endforeach
             </select>

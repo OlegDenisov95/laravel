@@ -9,6 +9,7 @@ use App\Models\Rubric;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class  HomeController extends Controller {
 
@@ -114,6 +115,19 @@ class  HomeController extends Controller {
             'content'=>'required',
             'rubric_id'=>'required',
         ]);
+//        $rules = [
+//            'title'=>'required|min:5|max:100',
+//            'content'=>'required',
+//            'rubric_id'=>'required',
+//        ];
+//        $messages =[
+//          'title.required' => 'Заполните поле названия',
+//            'title.min'=> 'Минимум 5 символов в названии',
+//            'content.required'=> 'Заполните Content',
+//            'rubric_id.required'=> 'Выберите рубрику из списка',
+//        ];
+
+        $validator = Validator::make($request->all(),$rules,$messages)->validate();
 //        dd($request->input('title'));
  //       dd($request->all());
         Post::create($request->all());
